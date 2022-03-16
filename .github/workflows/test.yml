@@ -25,6 +25,11 @@ jobs:
       - name: Install dependencies
         run: bundle install
       - name: Set up database
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          PGPASSWORD: postgres
+          RAILS_ENV: test
         run: bin/rails db:create db:schema:load db:migrate && bundle exec rspec
       - name: Run tests
         run: bin/rake
