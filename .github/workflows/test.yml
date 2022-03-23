@@ -36,4 +36,4 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true 
-          files: ./coverage/.resultset.json
+          files: ./coverage/coverage.xml
