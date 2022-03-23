@@ -3,8 +3,6 @@ on: [push]
 jobs:
   Test:
     runs-on: ubuntu-latest
-    env:
-      CI: true
     services:
       postgres:
         image: postgres:11-alpine
@@ -17,6 +15,7 @@ jobs:
     env:
       RAILS_ENV: test
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+      CI: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
