@@ -3,6 +3,8 @@ on: [push]
 jobs:
   Test:
     runs-on: ubuntu-latest
+    env:
+      CI: true
     services:
       postgres:
         image: postgres:11-alpine
