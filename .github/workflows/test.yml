@@ -29,3 +29,9 @@ jobs:
       # Add or replace test runners here
       - name: Run tests
         run: bin/rake
+      # Run codecov action
+      - name:
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true 
