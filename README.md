@@ -1,6 +1,7 @@
 # README
 
 ![Test CI](https://github.com/tpan/developing_blog/actions/workflows/test.yml/badge.svg)
+[![codecov](https://codecov.io/gh/tpan/developing_blog/branch/main/graph/badge.svg?token=JTHSQVT0Y7)](https://codecov.io/gh/tpan/developing_blog)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
