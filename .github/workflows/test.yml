@@ -32,4 +32,7 @@ jobs:
         run: bin/rake
       # Run codecov action
       - name: Code Coverage
-        run: curl -Os https://uploader.codecov.io/latest/linux/codecov && chmod +x codecov && ./codecov -t ${{secrets.CODECOV_TOKEN}}
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true 
