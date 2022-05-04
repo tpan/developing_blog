@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Articles", type: :request do
   describe "GET article index" do
-    let(:article) { build(:article, title: Faker::GreekPhilosophers.name,
-        body: Faker::GreekPhilosophers.quote )}
+    let(:article) { create(:article, attributes_for(:article))}
 
     it "returns success with the articles index template" do
       get articles_path
@@ -15,8 +14,7 @@ RSpec.describe "Articles", type: :request do
 
   describe "GET /articles/:id" do
     
-    let(:article) { create(:article, title: Faker::GreekPhilosophers.name,
-      body: Faker::GreekPhilosophers.quote )}
+    let(:article) { create(:article, attributes_for(:article))}
 
     it "returns success with the article/:id show template" do
       get article_path(article)
@@ -38,7 +36,7 @@ RSpec.describe "Articles", type: :request do
   describe "POST /articles" do
     context "with valid parameters" do
       it "successfully creates an article" do
-        post articles_path, params: {article: {title: Faker::Hipster.sentence(word_count: 3), body: Faker::Hipster.paragraph}}
+        post articles_path, params: {article: attributes_for(:article)}
 
         expect(response).to redirect_to(article_path(Article.last))
         expect(response).to have_http_status(:found)
@@ -57,8 +55,7 @@ RSpec.describe "Articles", type: :request do
 
   describe "PUT /articles/:id" do
     context "with valid parameters" do
-      let(:article) { create(:article, title: Faker::GreekPhilosophers.name,
-        body: Faker::GreekPhilosophers.quote )}
+      let(:article) { create(:article, attributes_for(:article))}
 
       context "when the article exists" do
         it "successfully updates the article" do 
@@ -78,19 +75,17 @@ RSpec.describe "Articles", type: :request do
     end
 
     context "with invalid parameters" do
-      let(:article) { create(:article, title: Faker::GreekPhilosophers.name,
-        body: Faker::GreekPhilosophers.quote )}
+      let(:article) { create(:article, attributes_for(:article))}
 
       it "throws an exception and responds with unprocessable entity" do 
-        put article_path(article), params: {article: {title: nil, body: nil} }
+        put article_path(article), params: {article: attributes_for(:article, :no_body) }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
 
   describe "DELETE /articles/:id" do
-    let(:article) { create(:article, title: Faker::GreekPhilosophers.name,
-      body: Faker::GreekPhilosophers.quote )}
+    let(:article) { create(:article, attributes_for(:article))}
 
     it "reduces articles count by 1" do
       expect{delete article_path(1)}.to change{Article.count}.by(-1)
