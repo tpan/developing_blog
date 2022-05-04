@@ -64,14 +64,6 @@ RSpec.describe "Articles", type: :request do
           expect(response).to have_http_status(:found)
         end
       end
-
-      context "when the article does not exist" do
-        it "fails to update the article" do 
-          put article_path(111), params: {article: attributes_for(:article) }
-
-          expect(response).to have_http_status(:not_found)
-        end
-      end
     end
 
     context "with invalid parameters" do
