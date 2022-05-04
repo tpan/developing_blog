@@ -62,16 +62,17 @@ RSpec.describe "Articles", type: :request do
 
       context "when the article exists" do
         it "successfully updates the article" do 
-          put article_path(article), params: {article: {title: Faker::Hipster.sentence(word_count:3), body: Faker::Hipster.paragraph}}
+          put article_path(article), params: {article: attributes_for(:article) }
+          
           expect(response).to have_http_status(:found)
         end
       end
 
       context "when the article does not exist" do
         it "fails to update the article" do 
-          expect{
-            put article_path(420), params: {article: {title: Faker::Hipster.sentence(word_count:3), body: Faker::Hipster.paragraph}}
-          }.to raise_error(ActionController::RoutingError)
+          put article_path(111), params: {article: attributes_for(:article) }
+
+          expect(response).to have_http_status(:not_found)
         end
       end
     end
