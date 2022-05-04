@@ -85,10 +85,10 @@ RSpec.describe "Articles", type: :request do
   end
 
   describe "DELETE /articles/:id" do
-    let(:article) { create(:article, attributes_for(:article))}
+    let!(:article) { create(:article, attributes_for(:article))}
 
     it "reduces articles count by 1" do
-      expect{delete article_path(1)}.to change{Article.count}.by(-1)
+      expect{delete article_path(article)}.to change{Article.count}.by(-1)
 
       expect(response).to have_http_status(:found)
     end
