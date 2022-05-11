@@ -2,10 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "Articles", type: :request do
   describe "GET article index" do
-    let(:article) { create(:article, attributes_for(:article))}
-
     it "returns success with the articles index template" do
       get articles_path
+      create(:article, attributes_for(:article))
 
       expect(response).to have_rendered(:index)
       expect(response).to have_http_status(:ok)
@@ -13,7 +12,6 @@ RSpec.describe "Articles", type: :request do
   end
 
   describe "GET /articles/:id" do
-    
     let(:article) { create(:article, attributes_for(:article))}
 
     it "returns success with the article/:id show template" do
@@ -45,7 +43,7 @@ RSpec.describe "Articles", type: :request do
 
     context "with invalid parameters" do
       it "responds with unprocessable entity" do
-        post articles_path, params: {article: {title: "", body: "Foo"}}
+        post articles_path, params: {article: attributes_for(:article, title:"")}
 
         expect(response).to have_rendered(:new)
         expect(response).to have_http_status(:unprocessable_entity)
