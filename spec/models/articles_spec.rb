@@ -28,4 +28,22 @@ RSpec.describe "Article", type: :model do
       end
     end
   end
+
+  describe '#to_param' do
+    context 'given an article that exists in the database' do
+      let(:article) {create(:article, attributes_for(:article, id: 1, slug: "lets-get-this-bread"))}
+      it 'returns the ID number joined with the slug' do
+
+        expect(article.to_param).to eq "1-lets-get-this-bread"
+      end
+    end
+
+    context 'given an article that does NOT exist in the database' do
+      let(:article) {build(:article)}
+
+      it 'returns nil' do
+        expect(article.to_param).to be_nil
+      end
+    end
+  end
 end
