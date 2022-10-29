@@ -3,6 +3,8 @@ class Article < ApplicationRecord
   validates :body, presence: true, length: { minimum: 10 }
   
   before_save :set_slug
+  
+  scope :ordered_articles, -> { order(created_at: :desc) }
 
   def to_param
     return nil unless persisted?

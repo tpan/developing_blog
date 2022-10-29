@@ -1,6 +1,14 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.all
+    # Number of articles to show
+    # How many articles per page
+    # Ordering of articles to display
+    # Which page we're on
+    @rate = params[:article_amount] || 5
+    @page = params[:page] || 1
+    @per_page = @page * @rate - @rate...@page * @rate
+
+    @articles = Article.ordered_articles[@per_page]
   end
 
   def show
