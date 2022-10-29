@@ -38,7 +38,7 @@ group :development, :test do
   gem 'faker'
   gem 'factory_bot_rails'
   # Call 'debug' anywhere in the code to stop execution and get a debugger console
-  gem 'debug'
+  gem 'debug', platforms: %i[ mri mingw x64_mingw ]
 end
 
 group :development do
