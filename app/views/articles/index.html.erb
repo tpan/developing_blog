@@ -7,4 +7,12 @@
     </li>
   <% end %>
 </ul>
-<%= link_to "New Article", new_article_path %>
+<div>
+  <%= link_to "New Article", new_article_path %>
+</div>
+<div>
+  <%= link_to "First page", articles_path(page: 0) %>
+  <%= link_to "Previous Page", articles_path(page: @page - 1) %>
+  <%= link_to "Next Page", articles_path(page: @page + 1) %>
+  <%= link_to "Last Page", articles_path(page: @last_page) %>
+</div>

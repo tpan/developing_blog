@@ -4,8 +4,6 @@ class Article < ApplicationRecord
   
   before_save :set_slug
   
-  scope :ordered_articles, -> { order(created_at: :desc) }
-
   def to_param
     return nil unless persisted?
 

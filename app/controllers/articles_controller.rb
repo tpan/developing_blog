@@ -1,14 +1,13 @@
 class ArticlesController < ApplicationController
+  ARTICLES_PER_PAGE = 5
   def index
     # Number of articles to show
     # How many articles per page
     # Ordering of articles to display
-    # Which page we're on
-    @rate = params[:article_amount] || 5
-    @page = params[:page] || 1
-    @per_page = @page * @rate - @rate...@page * @rate
 
-    @articles = Article.ordered_articles[@per_page]
+    @page = params.fetch(:page, 0).to_i
+    @articles = Article.offset(@page * ARTICLES_PER_PAGE).limit(ARTICLES_PER_PAGE)
+    @last_page = Article.all.size / ARTICLES_PER_PAGE
   end
 
   def show
