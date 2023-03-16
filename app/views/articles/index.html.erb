@@ -7,4 +7,23 @@
     </li>
   <% end %>
 </ul>
-<%= link_to "New Article", new_article_path %>
+<div>
+  <%= link_to "New Article", new_article_path %>
+</div>
+<div>
+  <%= link_to "First page", articles_path(page: 0, articles_per_page: params[:articles_per_page]) %>
+  <%= link_to "Previous Page", articles_path(page: @page - 1, articles_per_page: params[:articles_per_page]) %>
+  <%= link_to "Next Page", articles_path(page: @page + 1, articles_per_page: params[:articles_per_page]) %>
+  <%= link_to "Last Page", articles_path(page: @last_page, articles_per_page: params[:articles_per_page]) %>
+  <% @pages.each do |p| %>
+    <%= link_to "#{p+1}", articles_path(page: p, articles_per_page: params[:articles_per_page]) %>
+  <% end %>
+</div>
+
+<div>
+<p>Articles to display per page</p>
+<%= form_with(url: articles_path(@articles_per_page), method: :get) do |f| %>
+  <%= f.select :articles_per_page, options_for_select([5, 10, 15, 20], params[:articles_per_page]) %>
+  <%= f.submit %>
+<% end %>
+</div>
