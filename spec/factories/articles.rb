@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
-    factory :article do
-        title { Faker::GreekPhilosophers.name }
-        body { Faker::GreekPhilosophers.quote }
-        slug { Faker::GreekPhilosophers.name}
-        trait :no_body do
-            body { nil }
-        end
+  factory :article do
+    title { Faker::GreekPhilosophers.unique.name }
+    body { Faker::GreekPhilosophers.unique.quote }
+    slug { Faker::GreekPhilosophers.unique.name }
+    trait :no_body do
+      body { nil }
     end
+  end
 end

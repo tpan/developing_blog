@@ -1,29 +1,31 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Article", type: :model do
-  describe "has a  title and body" do
-    it "is valid" do
-        article = FactoryBot.build(:article, title: "Test title", body: "Body that is more than 10 chars")
+RSpec.describe 'Article', type: :model do
+  describe 'has a  title and body' do
+    it 'is valid' do
+      article = FactoryBot.build(:article, title: 'Test title', body: 'Body that is more than 10 chars')
 
-        expect(article.valid?).to eql true
+      expect(article.valid?).to eql true
     end
 
-    describe "is invalid" do
-      it "has a title but no body" do
-        article = FactoryBot.build(:article, title: "Test title", body: nil)
-
-        expect(article.valid?).to eql false
-      end
-  
-      it "has a body but no title" do
-        article = FactoryBot.build(:article, title: nil, body: "Test body with enough chars")
+    describe 'is invalid' do
+      it 'has a title but no body' do
+        article = FactoryBot.build(:article, title: 'Test title', body: nil)
 
         expect(article.valid?).to eql false
       end
 
-      it "has a body with too few characters" do
-        article = FactoryBot.build(:article, title: "Test title", body: "Test Body")
-  
+      it 'has a body but no title' do
+        article = FactoryBot.build(:article, title: nil, body: 'Test body with enough chars')
+
+        expect(article.valid?).to eql false
+      end
+
+      it 'has a body with too few characters' do
+        article = FactoryBot.build(:article, title: 'Test title', body: 'Test Body')
+
         expect(article.valid?).to eql false
       end
     end
@@ -31,15 +33,14 @@ RSpec.describe "Article", type: :model do
 
   describe '#to_param' do
     context 'given an article that exists in the database' do
-      let(:article) {create(:article, attributes_for(:article, id: 1, title: "lets-get-this-bread"))}
+      let(:article) { create(:article, attributes_for(:article, id: 1, title: 'lets-get-this-bread')) }
       it 'returns the slug' do
-
-        expect(article.to_param).to eq "1-lets-get-this-bread"
+        expect(article.to_param).to eq '1-lets-get-this-bread'
       end
     end
 
     context 'given an article that does NOT exist in the database' do
-      let(:article) {build(:article)}
+      let(:article) { build(:article) }
 
       it 'returns nil' do
         expect(article.to_param).to be_nil
@@ -49,17 +50,17 @@ RSpec.describe "Article", type: :model do
 
   describe '#set_slug' do
     context 'given an article that has a string title' do
-      let(:article) {create(:article, attributes_for(:article, title: "jakes right sheesh"))}
+      let(:article) { create(:article, attributes_for(:article, title: 'jakes right sheesh')) }
       it 'returns the parameterized slug' do
-        expect(article.slug).to eq "jakes-right-sheesh"
+        expect(article.slug).to eq 'jakes-right-sheesh'
       end
     end
 
     context 'given an article that has a title with numbers' do
-      let(:article) {create(:article, attributes_for(:article, title: 420))}
+      let(:article) { create(:article, attributes_for(:article, title: 420)) }
       it 'returns the parameterized slug' do
-        expect(article.slug).to eq "420"
+        expect(article.slug).to eq '420'
       end
-    end    
+    end
   end
 end
