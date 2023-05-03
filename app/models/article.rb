@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class Article < ApplicationRecord
   validates :title, presence: true
   validates :body, presence: true, length: { minimum: 10 }
-  
+
   before_save :set_slug
-  
+
   def to_param
     return nil unless persisted?
 
@@ -13,6 +15,6 @@ class Article < ApplicationRecord
   private
 
   def set_slug
-      self.slug = title.to_s.parameterize
+    self.slug = title.to_s.parameterize
   end
 end

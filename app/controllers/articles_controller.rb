@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ArticlesController < ApplicationController
   def index
     # Number of articles to show
@@ -34,7 +36,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article = Article.find(params[:id]) 
+    @article = Article.find(params[:id])
 
     if @article.update(article_params)
       redirect_to @article
@@ -51,7 +53,8 @@ class ArticlesController < ApplicationController
   end
 
   private
-    def article_params
-      params.require(:article).permit(:title, :body, :articles_per_page)
-    end
+
+  def article_params
+    params.require(:article).permit(:title, :body, :articles_per_page)
+  end
 end
